@@ -1,3 +1,7 @@
+import random
+import string
+import math
+
 products = {
 	'apple': 10,
 	'cucumber': 8,
@@ -15,8 +19,17 @@ products = {
 	'meat': 104,
 }
 
+def get_random_int_in_range(min, max):
+	return math.trunc( random.random() * max ) + min
 
-def add():
+def add(
+	name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5)),
+	cost = get_random_int_in_range(0, 1000)
+):
+	products[name] = cost
+
+
+def command_add():
 	product_name = input('Input product name: ')
 	product_cost = None
 
@@ -26,26 +39,32 @@ def add():
 		except:
 			print('Wrong input. Product cost must be an integer')
 
-	products[product_name] = product_cost
+	add(product_name, product_cost)
 
 
-while True:
-	cmd = input('Input command: ')
+def run_product_list_cmd_client():
+	while True:
+		cmd = input('Input command: ')
 
-	if cmd == 'help':
-		CMDS = [
-			'help - print all commands',
-			'add - add product',
-			'compute - compute sum of all costs',
-			'quit - quit the system'
-		]
-		print('\n'.join(CMDS))
-	elif cmd == 'quit':
-		print('See you soon!')
-		break
-	elif cmd == 'add':
-		add()
-	elif cmd == 'compute':
-		print('Sum of costs of all products =', sum(map(lambda product: products[product], products)))
-	else:
-		print('Unknown command')
+		if cmd == 'help':
+			CMDS = [
+				'help - print all commands',
+				'add - add product',
+				'addr - add random',
+				'compute - compute sum of all costs',
+				'quit - quit the system'
+			]
+			print('\n'.join(CMDS))
+		elif cmd == 'quit':
+			print('See you soon!')
+			break
+		elif cmd == 'add':
+			command_add()
+		elif cmd == 'addr':
+			add()
+		elif cmd == 'compute':
+			print('Sum of costs of all products =', sum(map(lambda product: products[product], products)))
+		else:
+			print('Unknown command')
+
+run_product_list_cmd_client()

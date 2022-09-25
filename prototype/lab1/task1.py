@@ -1,17 +1,23 @@
-integers = None
+def read_integers():
+	integers = None
 
-while True:
-	try:
-		integers = [int(word) for word in input('Input 3+ integers: ').split(' ')]
+	while True:
+		try:
+			integers = [int(word) for word in input('Input 3+ integers: ').split(' ')]
 
-		if len(integers) > 2:
-			break
-		else:
-			print('Need 3+ integers')
-	except:
-		print('Wrong input. Input string must contain only integers')
+			if len(integers) > 2:
+				return integers
+			else:
+				print('Need 3+ integers')
+		except:
+			print('Wrong input. Input string must contain only integers')
 
+
+
+integers = read_integers()
 integers = integers[-3:]
+
+
 
 def compare(int1, int2):
 	return int1 - int2
@@ -42,12 +48,16 @@ def compute_triangle_type(sides):
 
 	return 'versatile'
 
-if (
-	sum(integers[:2]) > integers[2] and
-	sum(integers[0::2]) > integers[1] and
-	sum(integers[1:]) > integers[0]
-):
-	print(integers, 'are sides of triangle')
-	print('Triangle type is {}'.format(compute_triangle_type(integers)))
-else:
-	print(integers, 'aren\'t sides of triangle')
+def check_triangle(sides = [2, 2, 3]):
+	if (
+		sum(sides[:2]) > sides[2] and
+		sum(sides[0::2]) > sides[1] and
+		sum(sides[1:]) > sides[0]
+	):
+		print(sides, 'are sides of triangle.', end=' ')
+		print('Triangle type is {}'.format(compute_triangle_type(sides)))
+	else:
+		print(sides, 'aren\'t sides of triangle')
+
+check_triangle(integers)
+check_triangle()
