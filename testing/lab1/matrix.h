@@ -51,7 +51,7 @@ u_int nrank(mdata n) {
 void print_matrix(mdata* matrix, u_int N) {
 	mdata max = nrank(matrix_max(matrix, N));
 	char* format = (char*) malloc(8);
-	sprintf(format, " %dd ", max + 1);
+	sprintf(format, " %dd ", max + 2);
 	format[0] = '%';
 
 	for (u_int i = 0; i < N * N; ++i) {
