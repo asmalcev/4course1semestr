@@ -5,11 +5,15 @@
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#include <float.h>
 
-u_int* scan_matrix(u_int N) {
+typedef int mdata;
+#define MDATA_MIN INT_MIN;
+
+mdata* scan_matrix(u_int N) {
 	if (N < 0) return NULL;
 
-	int* matrix = (int*) malloc(sizeof(int) * N * N);
+	mdata* matrix = (mdata*) malloc(sizeof(mdata) * N * N);
 
 	int success = 1;
 	for (u_int i = 0; i < N * N; ++i) {
@@ -24,15 +28,15 @@ u_int* scan_matrix(u_int N) {
 	return matrix;
 }
 
-int matrix_max(int* matrix, u_int N) {
-	int max = INT_MIN;
+mdata matrix_max(mdata* matrix, u_int N) {
+	mdata max = MDATA_MIN;
 	for (u_int i = 0; i < N * N; ++i) {
 		if (matrix[i] > max) max = matrix[i];
 	}
 	return max;
 }
 
-u_int nrank(int n) {
+u_int nrank(mdata n) {
 	n = abs(n);
 	u_int rank = 0;
 
@@ -44,8 +48,8 @@ u_int nrank(int n) {
 	return rank;
 }
 
-void print_matrix(int* matrix, u_int N) {
-	int max = nrank(matrix_max(matrix, N));
+void print_matrix(mdata* matrix, u_int N) {
+	mdata max = nrank(matrix_max(matrix, N));
 	char* format = (char*) malloc(8);
 	sprintf(format, " %dd ", max + 1);
 	format[0] = '%';
@@ -56,12 +60,12 @@ void print_matrix(int* matrix, u_int N) {
 	}
 }
 
-void sort_main_diagonal(int* matrix, u_int N) {
-	// bubble sort
+void sort_main_diagonal(mdata* matrix, u_int N) {
+	// bubble sort main diagonal
 	for (u_int i = 0; i < N; ++i) {
 		for (u_int j = 0; j < N - 1; ++j) {
 			if (matrix[j * N + j] > matrix[(j + 1) * N + j + 1]) {
-				int tmp = matrix[j * N + j];
+				mdata tmp = matrix[j * N + j];
 				matrix[j * N + j] = matrix[(j + 1) * N + j + 1];
 				matrix[(j + 1) * N + j + 1] = tmp;
 			}
