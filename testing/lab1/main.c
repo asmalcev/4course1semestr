@@ -20,6 +20,10 @@ void proccess() {
 
 	mdata* matrix = scan_matrix(N);
 
+	if (matrix == NULL) {
+		return;
+	}
+
 	printf("\nInput matrix:\n");
 	print_matrix(matrix, N);
 
@@ -31,7 +35,12 @@ void proccess() {
 int main() {
 	u_int Q;
 	printf("Input Q: ");
-	scanf("%d", &Q);
+	int success = scanf("%d", &Q);
+
+	if (Q < 1 || !success) {
+		printf("Invalid Q value\n");
+		return 0;
+	}
 
 	while (Q > 0) {
 		proccess();

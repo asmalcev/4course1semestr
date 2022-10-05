@@ -19,7 +19,7 @@ mdata* scan_matrix(u_int N) {
 	for (u_int i = 0; i < N * N; ++i) {
 		success = scanf("%d", matrix + i);
 		if (!success) {
-			printf("Invalid value\n");
+			printf("\nInvalid value\n");
 			free(matrix);
 			return NULL;
 		}
