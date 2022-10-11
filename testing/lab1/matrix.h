@@ -10,13 +10,16 @@
 typedef int mdata;
 #define MDATA_MIN INT_MIN;
 
+typedef unsigned int u_int;
+
 mdata* scan_matrix(u_int N) {
 	if (N < 0) return NULL;
 
 	mdata* matrix = (mdata*) malloc(sizeof(mdata) * N * N);
 
 	int success = 1;
-	for (u_int i = 0; i < N * N; ++i) {
+	u_int i;
+	for (i = 0; i < N * N; ++i) {
 		success = scanf("%d", matrix + i);
 		if (!success) {
 			printf("\nInvalid value\n");
@@ -30,7 +33,8 @@ mdata* scan_matrix(u_int N) {
 
 mdata matrix_max(mdata* matrix, u_int N) {
 	mdata max = MDATA_MIN;
-	for (u_int i = 0; i < N * N; ++i) {
+	u_int i;
+	for (i = 0; i < N * N; ++i) {
 		if (matrix[i] > max) max = matrix[i];
 	}
 	return max;
@@ -54,16 +58,18 @@ void print_matrix(mdata* matrix, u_int N) {
 	sprintf(format, " %dd ", max + 2);
 	format[0] = '%';
 
-	for (u_int i = 0; i < N * N; ++i) {
+	u_int i;
+	for (i = 0; i < N * N; ++i) {
 		printf(format, matrix[i]);
 		if (!((i + 1) % N)) printf("\n");
 	}
 }
 
 void sort_main_diagonal(mdata* matrix, u_int N) {
-	// bubble sort main diagonal
-	for (u_int i = 0; i < N; ++i) {
-		for (u_int j = 0; j < N - 1; ++j) {
+	/* bubble sort main diagonal */
+	u_int i, j;
+	for (i = 0; i < N; ++i) {
+		for (j = 0; j < N - 1; ++j) {
 			if (matrix[j * N + j] > matrix[(j + 1) * N + j + 1]) {
 				mdata tmp = matrix[j * N + j];
 				matrix[j * N + j] = matrix[(j + 1) * N + j + 1];

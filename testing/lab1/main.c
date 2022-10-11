@@ -30,6 +30,8 @@ void proccess() {
 	sort_main_diagonal(matrix, N);
 	printf("\nMatrix with sorted main diagonal:\n");
 	print_matrix(matrix, N);
+
+	free(matrix);
 }
 
 int main() {
