@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	{% include "head.html" %}
+</head>
+<body>
+	<div id="root">
+		{% include "header.html" %}
+
+		<div class="news-container">
+			{% if newspage %}
+				<a href="/" class="news-container__link">Вернуться на главную</a>
+			{% endif %}
+
+			{% if not newspage %}
+				<form class="search-form" action="/search/">
+					<input
+						type="text"
+						class="search-form__input"
+						name="srequest"
+						value="{{ srequest }}"
+						placeholder="Новости про Django...">
+					<input
+						type="submit"
+						value="Искать"
+						class="search-form__submit">
+				</form>
+		{% endif %}
+
+			{% for note in news %}
+				<div class="news">
+					<div class="news__title">{{ note.title }}</div>
+					<div class="news__date">{{ note.publication_date }}</div>
+					<div class="news__content">{{ note.content }}</div>
+					{% if not newspage %}
+						<a href="/news/{{ note.id }}/" class="news__link">Открыть отдельно</a>
+					{% endif %}
+				</div>
+			{% empty %}
+				Новости не были найдены :(
+			{% endfor %}
+		</div>
+
+		{% include "footer.html" %}
+	</div>
+</body>
+</html>
