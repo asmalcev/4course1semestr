@@ -1,5 +1,3 @@
-import re
-
 from django.shortcuts import render, HttpResponse, redirect
 from django.db.models import Q
 from .models import News
