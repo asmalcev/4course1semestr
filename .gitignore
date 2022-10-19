@@ -1,6 +1,6 @@
 __pycache__
 *.out
-trash
+*trash*
 *.sqlite3
 *env*
 migrations
