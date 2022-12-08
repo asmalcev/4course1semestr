@@ -116,7 +116,7 @@ def cmd_help():
 def cmd_read():
 	obj = read_obj(Objects)
 
-	if obj:
+	if not obj is None:
 		access = access_matrix[userid][obj]
 
 		if access[0] == '1':
@@ -130,7 +130,7 @@ def cmd_read():
 def cmd_write():
 	obj = read_obj(Objects)
 
-	if obj:
+	if not obj is None:
 		access = access_matrix[userid][obj]
 
 		if access[1] == '1':
